@@ -1,14 +1,10 @@
 '''
 Author: Gyan Mittal
-Corresponding Document: https://gyan-mittal.com/nlp-ai-ml/nlp-word-encoding-by-one-hot-encoding/
-Brief about One–Hot–Encoding:
-One of the simplest forms of word encoding to represent the word in NLP is One–Hot–Vector–Encoding.
-It requires very little computing power to convert text data into one-hot encoding data, and it’s easy to implement.
-One–Hot–Encoding has the advantage over Label/ Integer encoding, that the result is binary rather than ordinal, it does not suffer from undesirable bias.
-About Code: This code demonstrates the concept of One–Hot–Encoding with two simple example corpus
+Corresponding Document:
+Brief about linear regression stochistic gradient descent:
+
 '''
 import numpy as np
-print("naive regression")
 
 # Training data
 #y = wx + c
@@ -27,7 +23,7 @@ learning_rate = 0.001
 for epoch_no in range(epoch):
     loss = 0
     for i, _ in enumerate(yhat):
-        loss += (yhat[i] - train_y[i]) ** 2
+        loss += (yhat[i] - train_y[i]) ** 2 / len(yhat)
 
     if (epoch_no == 0 or (epoch_no+1)%10000 == 0):
         print("epoch_no: ", epoch_no, "\tloss:", loss)
