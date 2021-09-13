@@ -1,0 +1,8 @@
+name: nlp_word_encodings
+channels:
+  - defaults
+dependencies:
+  - python=3.9.5
+  - pip
+  - pip:
+    - numpy==1.21.1
