@@ -1,7 +1,7 @@
 # Regression
 
-Linear regression quantifies the relationship between one or more predictor variable(s) and one outcome variable.  
-For example, it can be used to quantify the relative impacts of age, gender, and diet (the predictor variables) on height (the outcome variable).
+Regression analysis is a set of processes for **estimating** the relationship between a dependent variable and one or more
+independent variables.
 
 **Regression Techniques**
 Below are the different regression techniques:

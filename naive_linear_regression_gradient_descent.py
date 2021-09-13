@@ -22,14 +22,14 @@ c = 10
 # Prediceted y
 yhat = w * train_x + c
 
-epoch = 10000
+epoch = 100000
 learning_rate = 0.001
 for epoch_no in range(epoch):
     loss = 0
     for i, _ in enumerate(yhat):
         loss += (yhat[i] - train_y[i]) ** 2
 
-    if (epoch_no == 0 or (epoch_no+1)%1000 == 0):
+    if (epoch_no == 0 or (epoch_no+1)%10000 == 0):
         print("epoch_no: ", epoch_no, "\tloss:", loss)
     dldc = 0
     dldw = 0
