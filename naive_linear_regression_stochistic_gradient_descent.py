@@ -10,14 +10,14 @@ About Code: This code demonstrates the concept of One–Hot–Encoding with two 
 import numpy as np
 print("naive regression")
 
+# Training data
 #y = wx + c
-
 train_x = np.array([3,5,6,8,9])
 train_y = np.array([7,11,13,17,19])
 
 # Initialize w and c with some random number
 w = 5
-c =10
+c = 10
 
 # Prediceted y
 yhat = w * train_x + c

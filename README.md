@@ -6,12 +6,12 @@ For example, it can be used to quantify the relative impacts of age, gender, and
 **Regression Techniques**
 Below are the different regression techniques:
 
-- Linear Regression.
-- Logistic Regression.
-- Ridge Regression.
-- Lasso Regression.
-- Polynomial Regression.
-- Bayesian Linear Regression.
+- Linear Regression
+- Logistic Regression
+- Ridge Regression
+- Lasso Regression
+- Polynomial Regression
+- Bayesian Linear Regression
 
 **Usage**
 
