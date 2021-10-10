@@ -31,8 +31,7 @@ def plot_separation_line_and_loss(train_x, train_y, w, b, loss, epoch, max_loss)
     plt.setp(ax2, xlabel='#Epochs (Log scale)', ylabel='Loss')
     ax2.set_xlim([1 , epoch * 1.1])
     ax2.set_xscale('log')
-    ax2.set_ylim([-1, max_loss * 1.1])
-
+    ax2.set_ylim([-.2, max_loss * 1.1])
 
     if(len(loss) > 0):
         x = np.array([0, max(train_x) + 1])
@@ -75,15 +74,13 @@ for epoch_no in range(epoch):
 
     no_samples = len(train_x)
     loss = (1/no_samples) * np.sum(np.square(yhat - train_y))
-    if epoch_no == 0: plot_separation_line_and_loss(train_x, train_y, w, b, loss_log, epoch, loss)
+    if (epoch_no == 0): plot_separation_line_and_loss(train_x, train_y, w, b, loss_log, epoch, loss)
     loss_log.append(loss)
     dldb = 2 * np.sum(yhat - train_y)
     dldw = 2 * np.sum((yhat - train_y) * train_x)
-
     w -= learning_rate * dldw
     b -= learning_rate * dldb
 
-    #if ((epoch_no == 0) or np.ceil(np.log10(epoch_no + 2)) > saved_epoch_no or (epoch_no + 1) == epoch):
     if ((epoch_no == 2) or np.ceil(np.log10(epoch_no + 2)) > saved_epoch_no or (epoch_no + 1) == epoch):
         print("epoch_no: ", (epoch_no + 1), "\tloss:", loss)
         if (epoch_no >= 2): plot_separation_line_and_loss(train_x, train_y, w, b, loss_log, epoch, max(loss_log))
