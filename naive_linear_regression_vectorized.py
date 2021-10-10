@@ -78,6 +78,6 @@ for epoch_no in range(epoch):
 
 print("w: ", w)
 print("b: ", b)
-create_gif(filenames)
+create_gif(filenames,"linear_regression_vectorized.gif")
 
 
