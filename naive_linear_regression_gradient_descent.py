@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import imageio
+from util import *
 
 # Training data
 #train_y = wx + b
@@ -55,17 +56,6 @@ def plot_separation_line_and_loss(train_x, train_y, w, b, loss, epoch, max_loss)
     plt.savefig(filename)
     #plt.show()
     plt.close()
-
-def create_gif(input_image_filenames, output_gif_name):
-    # build gif
-    with imageio.get_writer(output_gif_name, mode='I') as writer:
-        for filename in input_image_filenames:
-            image = imageio.imread(filename)
-            writer.append_data(image)
-    # Remove files
-    for filename in set(input_image_filenames):
-        os.remove(filename)
-
 
 epoch = 200000
 learning_rate = 0.001
