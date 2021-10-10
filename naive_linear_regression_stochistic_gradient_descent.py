@@ -7,18 +7,18 @@ Brief about linear regression stochistic gradient descent:
 import numpy as np
 
 # Training data
-#y = wx + c
-train_x = np.array([3,5,6,8,9])
-train_y = np.array([7,11,13,17,19])
+#train_y = wx + b
+train_x = np.array([3,4,5,6,7,8,9])
+train_y = np.array([7.2,9.1,10.8,12.5,13.5,17.4,18])
 
-# Initialize w and c with some random number
+# Initialize w and b with some random number
 w = 5
-c = 10
+b = 10
 
-# Prediceted y
-yhat = w * train_x + c
+# Prediceted train_y
+yhat = w * train_x + b
 
-epoch = 100000
+epoch = 200000
 learning_rate = 0.001
 for epoch_no in range(epoch):
     loss = 0
@@ -32,11 +32,11 @@ for epoch_no in range(epoch):
 
     # Stochistic Gradient Descent
     for i, _ in enumerate(yhat):
-        dldc += 2 * (yhat[i] - train_y[i])
-        dldw += 2 * (yhat[i] - train_y[i]) * train_x[i]
+        dldc = 2 * (yhat[i] - train_y[i])
+        dldw = 2 * (yhat[i] - train_y[i]) * train_x[i]
         w -= learning_rate * dldw
-        c -= learning_rate * dldc
-        yhat = w * train_x + c
+        b -= learning_rate * dldc
+        yhat = w * train_x + b
 
 print("w: ", w)
-print("c: ", c)
+print("b: ", b)
