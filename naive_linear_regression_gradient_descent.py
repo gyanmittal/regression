@@ -5,9 +5,6 @@ Brief about linear regression gradient descent:
 
 '''
 import numpy as np
-import matplotlib.pyplot as plt
-import os
-import imageio
 from util import *
 
 # Training data

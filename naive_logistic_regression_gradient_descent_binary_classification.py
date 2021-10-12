@@ -4,9 +4,6 @@ naive_logistic_regression_gradient_descent_binary_classification.py
 
 '''
 import numpy as np
-import matplotlib.pyplot as plt
-import os
-import imageio
 from util import *
 
 # Training data

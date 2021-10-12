@@ -1,40 +1,9 @@
-'''
-Author: Gyan Mittal
-naive_logistic_regression_gradient_descent_binary_classification.py
-
-'''
-import math
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Training data
-#train_y = wx + x2
-#train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [4,3],[5,4], [6,5], [8,6], [5,3], [6,3], [7,4], [8,5]])
-#train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
-np.random.seed(100)
-train_X = np.random.rand(100, 2) * 5
-train_y = []
-for i, val in enumerate(train_X):
-    distance = math.sqrt((val[0]-2.5)**2 + (val[1]-2.5)**2)
-    #print(distance)
-    #if(val[0] < 4):
-    if (distance < 1.95):
-        train_y.append(0)
-    else:
-        train_y.append(1)
-train_y = np.array(train_y)
-#print(train_y.sum())
-#print(train_X)
-train_X = np.array([[x1, x2, x1 * x1, x2 * x2] for x1, x2 in train_X])
 
 '''
 Author: Gyan Mittal
 '''
 import numpy as np
-import matplotlib.pyplot as plt
 import math
-import os
-import imageio
 from util import *
 
 def predict(X, W, b):
