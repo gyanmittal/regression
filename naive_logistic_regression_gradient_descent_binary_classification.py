@@ -31,7 +31,7 @@ def predict(X, W, b):
     return pred_y
 
 epoch = 200000
-learning_rate = 0.0001
+learning_rate = 0.001
 loss_log =[]
 saved_epoch_no = 0
 for epoch_no in range(epoch):
@@ -65,4 +65,4 @@ for epoch_no in range(epoch):
             image_files = plot_classification_separation_line_and_loss(train_X, train_y.flatten(), pred_train_y, pred_X, pred_y, loss_log, epoch, max(loss_log), image_files)
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
-create_gif(image_files, 'logistic_regression_linear_binary_classification.gif')
+create_gif(image_files, 'naive_logistic_regression_linear_binary_classification.gif')

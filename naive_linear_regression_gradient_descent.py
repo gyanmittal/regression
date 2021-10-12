@@ -20,7 +20,7 @@ np.random.seed(100)
 W = np.random.rand()
 b = np.random.rand()
 
-epoch = 2000
+epoch = 20000
 learning_rate = 0.001
 loss_log =[]
 
@@ -53,6 +53,6 @@ for epoch_no in range(epoch):
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
 print("W: ", W)
-print("x2: ", b)
+print("b: ", b)
 
 create_gif(image_files, 'linear_regression_gradient_descent.gif')

@@ -48,6 +48,6 @@ for epoch_no in range(epoch):
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
 print("W: ", W)
-print("x2: ", b)
+print("b: ", b)
 
 create_gif(image_files, 'linear_regression_stochistic_gradient_descent.gif')

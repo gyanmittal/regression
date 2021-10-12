@@ -17,7 +17,7 @@ def accuracy(y, y_pred):
 def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch, max_loss, img_files=[]):
 
     fig, (ax1, ax2) = plt.subplots(1, 2, sharex=False, figsize=(18, 9))
-    ax1.plot(train_x, train_y, "cD")
+    ax1.plot(train_x, train_y, "cD", markersize=7)
     ax1.set_title('Linear Regression training data')
     plt.setp(ax1, xlabel='x', ylabel='y')
     ax1.set_xlim([0, max(train_x) + 1])
@@ -32,11 +32,9 @@ def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch
     if(len(loss_log) > 0):
         x = np.array([0, max(train_x) + 1])
         y = W * x + b
-        ax1.plot(x, y)
+        ax1.plot(x, y, "c")
         ax1.set_title('Linear Regression' + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
-
-        ax2.plot(loss_log)
-
+        ax2.plot(loss_log, "b")
         ax2.set_title("Loss is " + r"$\bf{" + str("{:.6f}".format(loss_log[-1])) + "}$" + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
     directory = "images"
     if not os.path.exists(directory):
@@ -78,7 +76,7 @@ def plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y,
         ax1.plot(pred_X[:, 0][pred_y == 2], pred_X[:, 1][pred_y == 2], "b.", markersize=2)
         ax1.set_title('Multi Class Classification with ' + r"$\bf{" + str(train_accuracy) + "}$" + '% accuracy after ' + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + ' epochs')
 
-        ax2.plot(loss_log)
+        ax2.plot(loss_log, "b")
         ax2.set_title("Loss is " + r"$\bf{" + str("{:.6f}".format(loss_log[-1])) + "}$" + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
 
     directory = "images"
