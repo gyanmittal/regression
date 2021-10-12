@@ -6,9 +6,91 @@ import imageio
 def sigmoid(Z):
     return 1 / (1 + np.exp(-Z))
 
+def naive_softmax(x):
+    return np.exp(x)/np.exp(x).sum(axis=1, keepdims=True)
+
 def accuracy(y, y_pred):
     acc = int(sum(y == y_pred) / len(y) * 100)
     return acc
+
+# Plotting
+def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch, max_loss, img_files=[]):
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, sharex=False, figsize=(18, 9))
+    ax1.plot(train_x, train_y, "cD")
+    ax1.set_title('Linear Regression training data')
+    plt.setp(ax1, xlabel='x', ylabel='y')
+    ax1.set_xlim([0, max(train_x) + 1])
+    ax1.set_ylim([0, max(train_y) + 1])
+
+    ax2.set_title("Loss graph")
+    plt.setp(ax2, xlabel='#Epochs (Log scale)', ylabel='Loss')
+    ax2.set_xlim([1, epoch * 1.1])
+    ax2.set_xscale('log')
+    ax2.set_ylim([-1, max_loss * 1.1])
+
+    if(len(loss_log) > 0):
+        x = np.array([0, max(train_x) + 1])
+        y = W * x + b
+        ax1.plot(x, y)
+        ax1.set_title('Linear Regression' + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
+
+        ax2.plot(loss_log)
+
+        ax2.set_title("Loss is " + r"$\bf{" + str("{:.6f}".format(loss_log[-1])) + "}$" + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
+    directory = "images"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    filename = f'images/{len(loss_log)}.png'
+    for i in range(6):
+        img_files.append(filename)
+    # save frame
+    plt.savefig(filename)
+    plt.close()
+    return img_files
+
+def plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y, pred_X, pred_y, loss_log, epoch, max_loss, img_files=[]):
+
+    train_accuracy = accuracy(train_y, pred_train_y)
+    # Plotting
+    #fig = plt.figure(figsize=(9, 9))
+    fig, (ax1, ax2) = plt.subplots(1,2, sharex=False, figsize=(18, 9))
+
+    train_y = train_y.flatten()
+    ax1.plot(train_X[:, 0][train_y == 0], train_X[:, 1][train_y == 0], "cD", markersize=7)
+    ax1.plot(train_X[:, 0][train_y == 1], train_X[:, 1][train_y == 1], "mD", markersize=7)
+    ax1.plot(train_X[:, 0][train_y == 2], train_X[:, 1][train_y == 2], "bD", markersize=7)
+
+    ax1.set_title('Multi Class Classification training data')
+    plt.setp(ax1, xlabel='x1', ylabel='x2')
+    ax1.set_xlim([min(train_X[:, 0]) - 1, max(train_X[:, 0]) + 1])
+    ax1.set_ylim([min(train_X[:, 1]) - 1, max(train_X[:, 1]) + 1])
+
+    ax2.set_title("Loss graph")
+    plt.setp(ax2, xlabel='#Epochs (Log scale)', ylabel='Loss')
+    ax2.set_xlim([1 , epoch * 1.1])
+    ax2.set_xscale('log')
+    ax2.set_ylim([-0.1, max_loss * 1.1])
+
+    if(len(loss_log) > 0):
+        ax1.plot(pred_X[:, 0][pred_y == 0], pred_X[:, 1][pred_y == 0], "c.", markersize=2)
+        ax1.plot(pred_X[:, 0][pred_y == 1], pred_X[:, 1][pred_y == 1], "m.", markersize=2)
+        ax1.plot(pred_X[:, 0][pred_y == 2], pred_X[:, 1][pred_y == 2], "b.", markersize=2)
+        ax1.set_title('Multi Class Classification with ' + r"$\bf{" + str(train_accuracy) + "}$" + '% accuracy after ' + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + ' epochs')
+
+        ax2.plot(loss_log)
+        ax2.set_title("Loss is " + r"$\bf{" + str("{:.6f}".format(loss_log[-1])) + "}$" + " after " + r"$\bf{" + str(f'{len(loss_log) - 1:,}') + "}$" + " epochs")
+
+    directory = "images"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    filename = f'images/{len(loss_log)}.png'
+    for i in range(6):
+        img_files.append(filename)
+    # save frame
+    plt.savefig(filename)
+    plt.close()
+    return img_files
 
 def create_gif(input_image_filenames, output_gif_name):
     # build gif
