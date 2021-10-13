@@ -92,6 +92,7 @@ def plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y,
 
 def create_gif(input_image_filenames, output_gif_name):
     # build gif
+    output_gif_name = "images/" + output_gif_name
     with imageio.get_writer(output_gif_name, mode='I') as writer:
         for filename in input_image_filenames:
             image = imageio.imread(filename)
