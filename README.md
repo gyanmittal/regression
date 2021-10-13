@@ -17,7 +17,7 @@ Below are the different regression techniques:
 
 In case using conda then environment can be set using the command:
 - conda env create -f environment.yml
-- conda activate nlp_word_encodings
+- conda activate regression
 
 Now run ant python file using following command:
 - python3.9 \<python file name\>
