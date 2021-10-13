@@ -1,6 +1,6 @@
 '''
 Author: Gyan Mittal
-naive_logistic_regression_gradient_descent_binary_classification.py
+logistic_regression_binary_classification.py
 
 '''
 import numpy as np
@@ -62,4 +62,4 @@ for epoch_no in range(epoch):
             image_files = plot_classification_separation_line_and_loss(train_X, train_y.flatten(), pred_train_y, pred_X, pred_y, loss_log, epoch, max(loss_log), image_files)
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
-create_gif(image_files, 'naive_logistic_regression_linear_binary_classification.gif')
+create_gif(image_files, 'images/logistic_regression_binary_classification.gif')

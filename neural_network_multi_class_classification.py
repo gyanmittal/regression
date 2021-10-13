@@ -197,4 +197,4 @@ for epoch_no in range(epoch):
         if (epoch_no >= 1): plot_separation_line_and_loss(train_x, train_y, W1, b1, W2, b2, loss_log, epoch, max(loss_log))
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
-create_gif(filenames, 'neural_network_multi_class_classification.gif')
+create_gif(filenames, 'images/neural_network_multi_class_classification.gif')

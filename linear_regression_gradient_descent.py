@@ -52,4 +52,4 @@ for epoch_no in range(epoch):
 print("W: ", W)
 print("b: ", b)
 
-create_gif(image_files, 'linear_regression_gradient_descent.gif')
+create_gif(image_files, 'images/linear_regression_gradient_descent.gif')
