@@ -50,35 +50,35 @@ train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2])
 '''
 #binary classification [linear]
 train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [4,3],[5,4], [6,5], [8,6], [5,3], [6,3], [7,4], [8,5]])
-train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
+actual_train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
 '''
 
 '''
 # Training data for the binary classification with circular boundary
 np.random.seed(100)
 train_X = np.random.rand(200, 2) * 5
-train_y = []
+actual_train_y = []
 for i, val in enumerate(train_X):
     distance = math.sqrt((val[0]-2.5)**2 + (val[1]-2.5)**2)
 
     if (distance < 1.95):
-        train_y.append(0)
+        actual_train_y.append(0)
     else:
-        train_y.append(1)
-train_y = np.array(train_y)
+        actual_train_y.append(1)
+actual_train_y = np.array(actual_train_y)
 '''
 
 '''
 # Training data for the binary classification with rectangular boundary
 np.random.seed(100)
 train_X = np.random.rand(100, 2) * 5
-train_y = []
+actual_train_y = []
 for i, val in enumerate(train_X):
     if (math.fabs(val[0] - 2.5) < 1.95 and math.fabs(val[1] - 2.5) < 1.95):
-        train_y.append(0)
+        actual_train_y.append(0)
     else:
-        train_y.append(1)
-train_y = np.array(train_y)
+        actual_train_y.append(1)
+actual_train_y = np.array(actual_train_y)
 '''
 
 no_of_classes = len(np.unique(train_y))
@@ -92,9 +92,9 @@ output_size = no_of_classes # Number of classes
 
 W, b = initiate_weights(input_size, output_size)
 
-pred_x1 = np.arange(min(train_X[:, 0]) - 0.5, max(train_X[:, 0]) + 0.5, .1)
-pred_x2 = np.arange(min(train_X[:, 1]) - 0.5, max(train_X[:, 1]) + 0.5, .1)
-pred_X = np.array([[x1, x2] for x1 in pred_x1 for x2 in pred_x2])
+test_data_x1 = np.arange(min(train_X[:, 0]) - 0.5, max(train_X[:, 0]) + 0.5, .1)
+test_data_x2 = np.arange(min(train_X[:, 1]) - 0.5, max(train_X[:, 1]) + 0.5, .1)
+test_data_X = np.array([[x1, x2] for x1 in test_data_x1 for x2 in test_data_x2])
 
 epoch = 200000
 learning_rate = 0.001
@@ -106,21 +106,20 @@ for epoch_no in range(epoch):
     yhat = forward_propagation(train_X, W, b)
     loss = cross_entropy_loss(train_y_one_hot_vector, yhat)
     if (epoch_no==0):
-        pred_train_y = predict(train_X, W, b).flatten()
-        pred_y = predict(pred_X, W, b).flatten()
-        image_files = plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y, pred_X, pred_y, loss_log, epoch, max_loss=loss)
+        pred_train_y = predict(train_X, W, b)
+        pred_test_data_y = predict(test_data_X, W, b)
+        image_files = plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y, test_data_X, pred_test_data_y, loss_log, epoch, max_loss=loss)
         loss_log.append(loss)
     loss_log.append(loss)
 
-    W, b1 = back_propagation(train_X, train_y_one_hot_vector, yhat, W, b, learning_rate)
+    W, b = back_propagation(train_X, train_y_one_hot_vector, yhat, W, b, learning_rate)
 
     if ((epoch_no == 1) or np.ceil(np.log10(epoch_no + 2)) > saved_epoch_no or (epoch_no + 1) == epoch):
-        y_pred = predict(train_X, W, b)
-        print("epoch_no: ", (epoch_no + 1), "\tloss_log:", loss, "\taccuracy:", accuracy(train_y, y_pred))
+        pred_train_y = predict(train_X, W, b)
+        print("epoch_no: ", (epoch_no + 1), "\tloss_log:", loss, "\taccuracy:", accuracy(train_y, pred_train_y))
         if (epoch_no >= 1):
-            pred_train_y = predict(train_X, W, b).flatten()
-            pred_y = predict(pred_X, W, b).flatten()
-            image_files = plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y, pred_X, pred_y, loss_log, epoch, max(loss_log), image_files)
+            pred_test_data_y = predict(test_data_X, W, b)
+            image_files = plot_classification_separation_line_and_loss(train_X, train_y, pred_train_y, test_data_X, pred_test_data_y, loss_log, epoch, max(loss_log), image_files)
         saved_epoch_no = np.ceil(np.log10(epoch_no + 2))
 
 create_gif(image_files, 'images/logistic_regression_multiclass_classification.gif')

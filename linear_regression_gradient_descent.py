@@ -7,12 +7,12 @@ Brief about linear regression gradient descent:
 import numpy as np
 from util import *
 
-# Training data
-#train_y = wx + x2
+#Training data
+#train_y = W * train_X + b
 train_X = np.array([3, 4, 5, 6, 7, 8, 9])
 train_y = np.array([7.2,9.1,10.8,12.5,13.5,17.4,18])
 
-# Initialize W and x2 with some random number
+# Initialize W and b with some random number
 np.random.seed(100)
 W = np.random.rand()
 b = np.random.rand()
