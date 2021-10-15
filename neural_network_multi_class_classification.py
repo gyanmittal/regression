@@ -8,17 +8,6 @@ import os
 import imageio
 from util import *
 
-def naive_softmax(x):
-    return np.exp(x)/np.exp(x).sum(axis=1).reshape(-1,1)
-
-def relu(x):
-    return np.maximum(0, x)
-
-def d_relu(x):
-    x[x <= 0] = 0
-    x[x > 0] = 1
-    return x
-
 def predict(X, W1, b1, W2, b2):
     Z1 = X.dot(W1) + b1
     A1 = relu(Z1)
@@ -26,10 +15,6 @@ def predict(X, W1, b1, W2, b2):
     y_pred = naive_softmax(Z2)
     y_pred = np.array(np.argmax(y_pred, axis=1))
     return y_pred
-
-def accuracy(y, y_pred):
-    acc = int(sum(y == y_pred) / len(y) * 100)
-    return acc
 
 def back_propagation(train_x, train_y_one_hot_vector, yhat, Z1, A1, W1, b1, W2, b2, learning_rate=0.0005):
 
@@ -60,10 +45,7 @@ def forward_propagation(train_x, W1, b1, W2, b2):
     yhat = naive_softmax(Z2)
     return Z1, A1, yhat
 
-def cross_entropy_loss(y, y_pred):
-    n_samples = len(y)
-    loss = (-1/n_samples) * (np.sum(np.multiply(np.log(y_pred), y)))
-    return loss
+
 
 def initiate_weights(input_size, hidden_layer_size, output_size):
     np.random.seed(100)

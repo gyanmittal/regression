@@ -3,6 +3,23 @@ import matplotlib.pyplot as plt
 import os
 import imageio
 
+def relu(x):
+    return np.maximum(0, x)
+
+def d_relu(x):
+    x[x <= 0] = 0
+    x[x > 0] = 1
+    return x
+
+def accuracy(y, y_pred):
+    acc = int(sum(y == y_pred) / len(y) * 100)
+    return acc
+
+def cross_entropy_loss(y, y_pred):
+    n_samples = len(y)
+    loss = (-1/n_samples) * (np.sum(np.multiply(np.log(y_pred), y)))
+    return loss
+
 def sigmoid(Z):
     return 1 / (1 + np.exp(-Z))
 

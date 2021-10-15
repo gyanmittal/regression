@@ -10,10 +10,6 @@ def predict(X, W, b):
     y_pred = np.array(np.argmax(y_pred, axis=1))
     return y_pred
 
-def accuracy(y, y_pred):
-    acc = int(sum(y == y_pred) / len(y) * 100)
-    return acc
-
 def back_propagation(train_x, train_y_one_hot_vector, yhat, W, b, learning_rate):
     dl_dz = yhat - train_y_one_hot_vector
     dl_dw = train_x.T.dot(dl_dz)
@@ -28,11 +24,6 @@ def forward_propagation(train_x, W, b):
     Z = train_x.dot(W) + b
     yhat = naive_softmax(Z)
     return yhat
-
-def cross_entropy_loss(y, y_pred):
-    n_samples = len(y)
-    loss = (-1/n_samples) * (np.sum(np.multiply(np.log(y_pred), y)))
-    return loss
 
 def initiate_weights(input_size, output_size):
     np.random.seed(1)
