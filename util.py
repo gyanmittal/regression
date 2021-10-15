@@ -29,8 +29,8 @@ def naive_softmax(x):
 # Plotting linear regression
 def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch, max_loss, img_files=[]):
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, sharex=False, figsize=(12, 6))
-    ax1.plot(train_x, train_y, "cD", markersize=7)
+    fig, (ax1, ax2) = plt.subplots(1, 2, sharex=False, figsize=(10, 5))
+    ax1.plot(train_x, train_y, "cD", markersize=6)
     ax1.set_title('Linear Regression training data')
     plt.setp(ax1, xlabel='X', ylabel='y')
     ax1.set_xlim([0, max(train_x) + 1])
@@ -53,7 +53,7 @@ def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch
     if not os.path.exists(directory):
         os.makedirs(directory)
     filename = f'images/{len(loss_log)}.png'
-    for i in range(6):
+    for i in range(13):
         img_files.append(filename)
     # save frame
     plt.savefig(filename)
@@ -66,12 +66,12 @@ def plot_classification_separation_line_and_loss(train_X, actual_train_y, pred_t
     train_accuracy = accuracy(actual_train_y, pred_train_y)
     # Plotting
     #fig = plt.figure(figsize=(9, 9))
-    fig, (ax1, ax2) = plt.subplots(1,2, sharex=False, figsize=(12, 6))
+    fig, (ax1, ax2) = plt.subplots(1,2, sharex=False, figsize=(10, 5))
 
     actual_train_y = actual_train_y.flatten()
-    ax1.plot(train_X[:, 0][actual_train_y == 0], train_X[:, 1][actual_train_y == 0], "cD", markersize=7)
-    ax1.plot(train_X[:, 0][actual_train_y == 1], train_X[:, 1][actual_train_y == 1], "mD", markersize=7)
-    ax1.plot(train_X[:, 0][actual_train_y == 2], train_X[:, 1][actual_train_y == 2], "bD", markersize=7)
+    ax1.plot(train_X[:, 0][actual_train_y == 0], train_X[:, 1][actual_train_y == 0], "cD", markersize=6)
+    ax1.plot(train_X[:, 0][actual_train_y == 1], train_X[:, 1][actual_train_y == 1], "mD", markersize=6)
+    ax1.plot(train_X[:, 0][actual_train_y == 2], train_X[:, 1][actual_train_y == 2], "bD", markersize=6)
 
     ax1.set_title('Multi Class Classification training data')
     plt.setp(ax1, xlabel='x1', ylabel='x2')
@@ -97,7 +97,7 @@ def plot_classification_separation_line_and_loss(train_X, actual_train_y, pred_t
     if not os.path.exists(directory):
         os.makedirs(directory)
     filename = f'images/{len(loss_log)}.png'
-    for i in range(6):
+    for i in range(13):
         img_files.append(filename)
     # save frame
     plt.savefig(filename)
