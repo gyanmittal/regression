@@ -6,10 +6,10 @@ import imageio
 def relu(x):
     return np.maximum(0, x)
 
-def d_relu(x):
-    x[x <= 0] = 0
-    x[x > 0] = 1
-    return x
+def d_relu(X):
+    X[X <= 0] = 0
+    X[X > 0] = 1
+    return X
 
 def accuracy(y, y_pred):
     acc = int(sum(y == y_pred) / len(y) * 100)
@@ -26,17 +26,13 @@ def sigmoid(Z):
 def naive_softmax(x):
     return np.exp(x)/np.exp(x).sum(axis=1, keepdims=True)
 
-def accuracy(y, y_pred):
-    acc = int(sum(y == y_pred) / len(y) * 100)
-    return acc
-
 # Plotting linear regression
 def plot_linear_regression_line_and_loss(train_x, train_y, W, b, loss_log, epoch, max_loss, img_files=[]):
 
     fig, (ax1, ax2) = plt.subplots(1, 2, sharex=False, figsize=(18, 9))
     ax1.plot(train_x, train_y, "cD", markersize=7)
     ax1.set_title('Linear Regression training data')
-    plt.setp(ax1, xlabel='x', ylabel='y')
+    plt.setp(ax1, xlabel='X', ylabel='y')
     ax1.set_xlim([0, max(train_x) + 1])
     ax1.set_ylim([0, max(train_y) + 1])
 
@@ -111,9 +107,9 @@ def plot_classification_separation_line_and_loss(train_X, actual_train_y, pred_t
 def create_gif(input_image_filenames, output_gif_name):
     # build gif
     with imageio.get_writer(output_gif_name, mode='I') as writer:
-        for filename in input_image_filenames:
-            image = imageio.imread(filename)
+        for image_file_name in input_image_filenames:
+            image = imageio.imread(image_file_name)
             writer.append_data(image)
-    # Remove files
-    for filename in set(input_image_filenames):
-        os.remove(filename)
+    # Remove image files
+    for image_file_name in set(input_image_filenames):
+        os.remove(image_file_name)
