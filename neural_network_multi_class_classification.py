@@ -16,7 +16,7 @@ def predict(X, W1, b1, W2, b2):
     y_pred = np.array(np.argmax(y_pred, axis=1))
     return y_pred
 
-def back_propagation(train_x, train_y_one_hot_vector, yhat, Z1, A1, W1, b1, W2, b2, learning_rate=0.0005):
+def back_propagation(train_X, train_y_one_hot_vector, yhat, Z1, A1, W1, b1, W2, b2, learning_rate=0.0005):
 
     #dl_dyhat = np.divide(train_y_one_hot_vector, pred_train_y)
     dl_dz2 = yhat - train_y_one_hot_vector
@@ -26,7 +26,7 @@ def back_propagation(train_x, train_y_one_hot_vector, yhat, Z1, A1, W1, b1, W2, 
     dl_b2 = np.sum(dl_dz2, axis=0)
 
     dl_dz1 = dl_dA1 * d_relu(Z1)
-    dl_dw1 = train_x.T.dot(dl_dz1)
+    dl_dw1 = train_X.T.dot(dl_dz1)
     #dl_db1 = np.sum(dl_dz1, axis=0, keepdims=True)
     dl_db1 = np.sum(dl_dz1, axis=0)
 
@@ -38,14 +38,12 @@ def back_propagation(train_x, train_y_one_hot_vector, yhat, Z1, A1, W1, b1, W2, 
 
     return W1, W2, b1, b2
 
-def forward_propagation(train_x, W1, b1, W2, b2):
-    Z1 = train_x.dot(W1) + b1
+def forward_propagation(train_X, W1, b1, W2, b2):
+    Z1 = train_X.dot(W1) + b1
     A1 = relu(Z1)
     Z2 = A1.dot(W2) + b2
     yhat = naive_softmax(Z2)
     return Z1, A1, yhat
-
-
 
 def initiate_weights(input_size, hidden_layer_size, output_size):
     np.random.seed(100)
@@ -58,31 +56,31 @@ def initiate_weights(input_size, hidden_layer_size, output_size):
 '''
 #multi class classification [linear]
 train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [4,3],[5,4], [6,5], [8,6], [5,3], [6,3], [7,4], [8,5], [3,1], [3,2], [4,1], [4,2], [6,1], [6,2], [5,1], [5,2]])
-actual_train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2])
+train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2])
 '''
 
 '''
 #binary classification [linear]
 train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [4,3],[5,4], [6,5], [8,6], [5,3], [6,3], [7,4], [8,5]])
-actual_train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
+train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
 '''
 
-'''
+#'''
 # Training data for the binary classification with circular boundary
 np.random.seed(100)
 train_X = np.random.rand(200, 2) * 5
-actual_train_y = []
+train_y = []
 for i, val in enumerate(train_X):
     distance = math.sqrt((val[0]-2.5)**2 + (val[1]-2.5)**2)
 
     if (distance < 1.95):
-        actual_train_y.append(0)
+        train_y.append(0)
     else:
-        actual_train_y.append(1)
-actual_train_y = np.array(actual_train_y)
-'''
-
+        train_y.append(1)
+train_y = np.array(train_y)
 #'''
+
+'''
 # Training data for the binary classification with rectangular boundary
 np.random.seed(100)
 train_X = np.random.rand(100, 2) * 5
@@ -93,7 +91,7 @@ for i, val in enumerate(train_X):
     else:
         train_y.append(1)
 train_y = np.array(train_y)
-#'''
+'''
 
 no_of_classes = len(np.unique(train_y))
 train_y_one_hot_vector = np.array([np.zeros(no_of_classes)] * len(train_y))
