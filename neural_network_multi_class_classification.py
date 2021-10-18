@@ -59,13 +59,13 @@ train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [
 train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2])
 '''
 
-'''
+#'''
 #binary classification [linear]
 train_X = np.array([[0.5,1], [0.5,2], [1,2],[1,3], [2,3], [3,5], [3,6], [1,3], [4,3],[5,4], [6,5], [8,6], [5,3], [6,3], [7,4], [8,5]])
 train_y = np.array([0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1])
-'''
-
 #'''
+
+'''
 # Training data for the binary classification with circular boundary
 np.random.seed(100)
 train_X = np.random.rand(200, 2) * 5
@@ -78,7 +78,7 @@ for i, val in enumerate(train_X):
     else:
         train_y.append(1)
 train_y = np.array(train_y)
-#'''
+'''
 
 '''
 # Training data for the binary classification with rectangular boundary
@@ -98,7 +98,7 @@ train_y_one_hot_vector = np.array([np.zeros(no_of_classes)] * len(train_y))
 for idx, val in enumerate(train_y):
     train_y_one_hot_vector[idx][val] = 1
 
-# Neural network with one hidden size
+# Neural network with one hidden layer
 input_size = len(train_X[0]) # Number of input features
 hidden_layer_size = 20 # Design choice
 output_size = no_of_classes # Number of classes
@@ -109,7 +109,7 @@ test_data_X = np.array([[x1, x2] for x1 in test_data_x1 for x2 in test_data_x2])
 
 W1, b1, W2, b2 = initiate_weights(input_size, hidden_layer_size, output_size)
 
-epoch = 20000
+epoch = 200000
 loss_log =[]
 
 saved_epoch_no = 0

@@ -7,8 +7,8 @@ def relu(x):
     return np.maximum(0, x)
 
 def d_relu(X):
-    X[X <= 0] = 0
-    X[X > 0] = 1
+    X[X<=0] = 0
+    X[X>0] = 1
     return X
 
 def accuracy(y, y_pred):
